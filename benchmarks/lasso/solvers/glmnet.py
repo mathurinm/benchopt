@@ -14,7 +14,7 @@ class Solver(BaseSolver):
     name = "glmnet"
 
     install_cmd = 'conda'
-    requirements = ['r-base', 'rpy2', 'r-glmnet']
+    requirements = ['r-base', 'rpy2', 'r-glmnet', 'r-matrix']
     stop_strategy = 'iteration'
     support_sparse = True
 
