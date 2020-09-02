@@ -19,21 +19,23 @@ class Solver(BaseSolver):
     support_sparse = True
 
     def set_objective(self, X, y, lmbd):
-        self.X, self.y, self.lmbd = X, y, lmbd
+        self.y, self.lmbd = y, lmbd
         self.lmbd_max = np.max(np.abs(X.T @ y))
 
         numpy2ri.activate()
         packages.importr('glmnet')
         self.glmnet = robjects.r['glmnet']
 
-        if sparse.issparse(self.X):
+        if sparse.issparse(X):
             r_Matrix = packages.importr("Matrix")
             self.X = r_Matrix.sparseMatrix(
-                i = robjects.IntVector(self.X.row + 1),
-                j = robjects.IntVector(self.X.col + 1),
-                x = robjects.FloatVector(self.X.data),
-                dims = robjects.IntVector(self.X.shape)
+                i = robjects.IntVector(X.row + 1),
+                j = robjects.IntVector(X.col + 1),
+                x = robjects.FloatVector(X.data),
+                dims = robjects.IntVector(X.shape)
             )
+        else:
+            self.X = X
 
     def run(self, n_iter):
         fit_dict = {"lambda.min.ratio": self.lmbd / self.lmbd_max}
