@@ -40,7 +40,7 @@ Let's now look how to create your personal GitHub token.
 Obtaining a GitHub token
 ------------------------
 
-Visit `https://github.com/settings/tokens <https://github.com/settings/tokens>`_
+Visit `https://github.com/settings/tokens <https://github.com/settings/tokens/new>`_
 and click on ``generate new token``.
 Then create a token named benchopt, ticking the **repo** box as shown below:
 
